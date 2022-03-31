@@ -3,8 +3,8 @@ class CocktailsController < ApplicationController
   before_action :api, only: [:index]
 
   def index
-    account_sid = 'ACdda5d58aa60f5a284b47286328bfe0df'
-    auth_token = '17b42ae9fe5359a0cdd9070033dd48c5'
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token = ENV['TWILIO_AUTH_TOKEN']
     @client = Twilio::REST::Client.new(account_sid, auth_token)
     message = @client.messages.create(
                              body:

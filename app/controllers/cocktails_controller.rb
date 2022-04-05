@@ -11,11 +11,11 @@ class CocktailsController < ApplicationController
   end
 
   def create
-    UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
     @cocktail = Cocktail.new(cocktail_params)
     if !@cocktail.save
       render :new
     end
+    UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
   end
 
   private

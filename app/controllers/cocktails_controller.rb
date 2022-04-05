@@ -4,9 +4,10 @@ require 'uri'
 class CocktailsController < ApplicationController
 
   before_action :api, only: [:mail]
+  before_action :valid, only: [:mail]
 
   def mail
-    UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
+    UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
   end
 
   private
@@ -15,7 +16,9 @@ class CocktailsController < ApplicationController
     name = cocktail_params[:name]
     @email = cocktail_params[:email]
     @response = Cocktail.api(name)
-    # raise
+  end
+
+  def valid
     if @response.nil?
       render :not_valid
     else

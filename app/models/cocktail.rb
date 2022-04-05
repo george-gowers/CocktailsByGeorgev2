@@ -3,13 +3,15 @@ class Cocktail < ApplicationRecord
   def self.api(name)
     text = RestClient.get "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=#{name}"
     @data = JSON.parse(text)
-    return [description, ingredients]
+    if !@data["drinks"].nil?
+      return [instructions, ingredients]
+    end
   end
 
   private
 
-  def self.description
-    description = @data["drinks"][0]["strInstructions"]
+  def self.instructions
+    instructions = @data["drinks"][0]["strInstructions"]
   end
 
   def self.ingredients

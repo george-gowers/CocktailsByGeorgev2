@@ -12,10 +12,11 @@ class CocktailsController < ApplicationController
 
   def create
     @cocktail = Cocktail.new(cocktail_params)
-    if !@cocktail.save
+    if @cocktail.save
+      UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
+    else
       render :new
     end
-    UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
   end
 
   private

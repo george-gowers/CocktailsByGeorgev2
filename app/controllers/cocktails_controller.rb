@@ -3,11 +3,19 @@ require 'uri'
 
 class CocktailsController < ApplicationController
 
-  before_action :api, only: [:mail]
-  before_action :valid, only: [:mail]
+  before_action :api, only: [:create]
+  before_action :valid, only: [:create]
 
-  def mail
+  def new
+    @cocktail = Cocktail.new
+  end
+
+  def create
     UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
+    @cocktail = Cocktail.new(cocktail_params)
+    if !@cocktail.save
+      render :new
+    end
   end
 
   private
@@ -28,7 +36,7 @@ class CocktailsController < ApplicationController
   end
 
   def cocktail_params
-    params.require(:mail).permit(:name, :email)
+    params.require(:cocktail).permit(:name, :email)
   end
 
 end

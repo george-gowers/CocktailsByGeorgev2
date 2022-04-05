@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    ## display the form with cocktail name and phone number here
+    @cocktail = Cocktail.new
   end
 end

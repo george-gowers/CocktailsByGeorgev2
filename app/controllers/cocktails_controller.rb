@@ -12,15 +12,20 @@ class CocktailsController < ApplicationController
   private
 
   def api
-    name = params[:name]
-    @email = params[:email]
+    name = cocktail_params[:name]
+    @email = cocktail_params[:email]
     @response = Cocktail.api(name)
+    # raise
     if @response.nil?
       render :not_valid
     else
       @instructions = @response[0]
       @ingredients = @response[1]
     end
+  end
+
+  def cocktail_params
+    params.require(:mail).permit(:name, :email)
   end
 
 end

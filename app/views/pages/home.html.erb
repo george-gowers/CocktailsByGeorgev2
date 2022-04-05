@@ -1,7 +1,9 @@
-<h1>Input the name of your favorite Cocktail!</h1>
+<div class="container">
+  <h1>Input the name of your favorite Cocktail!</h1>
 
-<%= simple_form_for :mail, url: mail_path, method: :get do |f| %>
-  <%= f.input :name %>
-  <%= f.input :email %>
-  <%= f.submit 'Click for Cocktail!' %>
-<% end %>
+  <%= simple_form_for :mail, url: mail_path, method: :get do |f| %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.submit 'Click for Cocktail!', class: "btn btn-primary" %>
+  <% end %>
+</div>

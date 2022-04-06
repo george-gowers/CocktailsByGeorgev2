@@ -1,0 +1,32 @@
+.background {
+  background-image: image-url("cocktail.png");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.form {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 124px;
+  padding: 16px 24px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  width: 100%;
+  margin-top: 16px;
+  background-color: rgb(255, 90, 118);
+  color: white;
+
+}
+
+.btn:hover {
+  color: white;
+  background-color: rgb(192, 37, 63);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}

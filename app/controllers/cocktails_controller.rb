@@ -4,7 +4,7 @@ require 'uri'
 class CocktailsController < ApplicationController
 
   before_action :api, only: [:create]
-  before_action :valid, only: [:create]
+  before_action :valid?, only: [:create]
 
   def new
     @cocktail = Cocktail.new
@@ -27,7 +27,7 @@ class CocktailsController < ApplicationController
     @response = Cocktail.api(name)
   end
 
-  def valid
+  def valid?
     if @response.nil?
       render :not_valid
     else

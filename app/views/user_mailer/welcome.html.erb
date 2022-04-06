@@ -1,7 +1,9 @@
 <h1>Hey fellow cocktail lover!</h1>
 
 <h2>Ingredients</h2>
-<%= @ingredients %>
+<% @ingredients.each_with_index do |ingredient, index| %>
+  <%= "#{index + 1}.#{ingredient}" %><br>
+<% end %>
 
 <h2>Preperation Method</h2>
 <%= @instructions %>

@@ -19,11 +19,17 @@ class Cocktail < ApplicationRecord
   end
 
   def self.ingredients
-    ingredient1 = @data["drinks"][0]["strIngredient1"]
-    ingredient2 = @data["drinks"][0]["strIngredient2"]
-    ingredient3 = @data["drinks"][0]["strIngredient3"]
-    ingredient4 = @data["drinks"][0]["strIngredient4"]
-    ingredients = "#{ingredient1}, #{ingredient2}, #{ingredient3}, #{ingredient4}"
+    ingredients = []
+    ingredient = @data["drinks"][0]["strIngredient1"]
+    number = 1
+
+    while ingredient != ""
+      ingredients << ingredient
+      number += 1
+      ingredient = @data["drinks"][0]["strIngredient#{number}"]
+    end
+
+    return ingredients
   end
 
 end

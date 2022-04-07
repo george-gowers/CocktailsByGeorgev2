@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   get '/cocktails/not_valid', to: 'cocktails#not_valid'
 
+  get '/cocktails/email_not_valid', to: 'cocktails#mail_not_valid'
+
 end

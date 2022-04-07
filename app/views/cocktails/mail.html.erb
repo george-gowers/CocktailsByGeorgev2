@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-8">
         <div class="form">
 
-          <h1>The email with the recipe has been sent</h1>
+          <h1>The recipe has been sent to: <%= Cocktail.last.email.downcase %></h1>
 
           <%= link_to "Search for another cocktail", root_path, class: "btn" %>
 

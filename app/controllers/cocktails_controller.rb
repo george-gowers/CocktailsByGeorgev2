@@ -10,13 +10,9 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
       if valid?
-        if valid_mail?
-          @instructions = @response[0]
-          @ingredients = @response[1]
-          UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
-        else
-          redirect_to cocktails_email_not_valid_path
-        end
+        @instructions = @response[0]
+        @ingredients = @response[1]
+        UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
       else
         redirect_to cocktails_not_valid_path
       end
@@ -41,10 +37,6 @@ class CocktailsController < ApplicationController
 
   def valid?
     !@response.nil?
-  end
-
-  def valid_mail?
-    @email.match?(/\w+@\w+\.\w+/)
   end
 
   def cocktail_params

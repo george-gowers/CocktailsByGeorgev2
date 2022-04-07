@@ -1,15 +1,16 @@
 class CocktailsController < ApplicationController
 
-  before_action :api, only: [:create]
+  before_action :api_call, only: [:create, :valid?]
 
   def new
     @cocktail = Cocktail.new
   end
 
   def create
+    response = api_call
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
-      is_valid_cocktail?
+      valid?
       UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
     else
       render :new
@@ -18,13 +19,13 @@ class CocktailsController < ApplicationController
 
   private
 
-  def api
+  def api_call
     name = cocktail_params[:name]
     @email = cocktail_params[:email]
     @response = Cocktail.api(name)
   end
 
-  def is_valid_cocktail?
+  def valid?
     if @response.nil?
       render :not_valid
     else

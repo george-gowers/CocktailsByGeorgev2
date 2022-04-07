@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   resources :cocktails, only: [:create]
 
+  get '/cocktails/not_valid', to: 'cocktails#not_valid'
+
 end

@@ -1,20 +1,27 @@
 class CocktailsController < ApplicationController
 
-  before_action :api_call, only: [:create, :valid?]
+  before_action :api_call, only: [:create]
 
   def new
     @cocktail = Cocktail.new
   end
 
   def create
-    response = api_call
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
-      valid?
-      UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
+      if valid?
+        @instructions = @response[0]
+        @ingredients = @response[1]
+        UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
+      else
+        redirect_to cocktails_not_valid_path
+      end
     else
       render :new
     end
+  end
+
+  def not_valid
   end
 
   private
@@ -25,13 +32,17 @@ class CocktailsController < ApplicationController
     @response = Cocktail.api(name)
   end
 
+  # def valid
+  #   if @response.nil?
+  #     return nil
+  #   else
+  #     @instructions = @response[0]
+  #     @ingredients = @response[1]
+  #   end
+  # end
+
   def valid?
-    if @response.nil?
-      render :not_valid
-    else
-      @instructions = @response[0]
-      @ingredients = @response[1]
-    end
+    !@response.nil?
   end
 
   def cocktail_params

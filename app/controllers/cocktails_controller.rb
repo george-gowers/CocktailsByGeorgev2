@@ -1,10 +1,6 @@
-require 'net/http'
-require 'uri'
-
 class CocktailsController < ApplicationController
 
   before_action :api, only: [:create]
-  before_action :valid?, only: [:create]
 
   def new
     @cocktail = Cocktail.new
@@ -13,7 +9,8 @@ class CocktailsController < ApplicationController
   def create
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
-      UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now != true
+      is_valid_cocktail?
+      UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
     else
       render :new
     end
@@ -27,7 +24,7 @@ class CocktailsController < ApplicationController
     @response = Cocktail.api(name)
   end
 
-  def valid?
+  def is_valid_cocktail?
     if @response.nil?
       render :not_valid
     else

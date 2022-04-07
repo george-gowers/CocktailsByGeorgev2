@@ -13,8 +13,9 @@ class CocktailsController < ApplicationController
         @instructions = @response[0]
         @ingredients = @response[1]
         UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
+        redirect_to mail_path
       else
-        render :not_valid
+        redirect_to not_valid_path
       end
     else
       render :new

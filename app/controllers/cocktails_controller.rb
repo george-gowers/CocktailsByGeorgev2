@@ -22,6 +22,10 @@ class CocktailsController < ApplicationController
     end
   end
 
+  def reroute
+    redirect_to root_path
+  end
+
   private
 
   def api_call

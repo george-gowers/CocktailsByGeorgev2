@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   get '/not_valid', to: 'cocktails#not_valid'
 
+  get '/cocktails', to: 'cocktails#reroute'
+
 end

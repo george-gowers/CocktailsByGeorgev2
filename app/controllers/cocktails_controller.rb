@@ -1,7 +1,5 @@
 class CocktailsController < ApplicationController
 
-  before_action :api_call, only: [:create]
-
   def new
     @cocktail = Cocktail.new
   end
@@ -9,10 +7,13 @@ class CocktailsController < ApplicationController
   def create
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
+      api_call
       if valid_cocktail?
         @instructions = @response[0]
         @ingredients = @response[1]
-        UserMailer.welcome({ingredients: @ingredients, instructions: @instructions, email: @email }).deliver_now
+        @image = @response[2]
+        @name = @response[3]
+        UserMailer.recipe({ingredients: @ingredients, instructions: @instructions, image: @image, name: @name, email: @email }).deliver_now
         redirect_to mail_path
       else
         redirect_to not_valid_path

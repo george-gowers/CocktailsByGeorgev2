@@ -1,4 +1,4 @@
-- Cocktail app that emails you a recipe.
+- Cocktail app that emails you a cocktail recipe.
 - Created with Ruby on Rails.
 - Hosted on Heroku.
 

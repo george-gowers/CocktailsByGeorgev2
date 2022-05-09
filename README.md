@@ -1,3 +1,5 @@
+url: www.cocktailsbygeorge.nl
+
 This App was built using Ruby on Rails and it is hosted on Heroku.
 
 How the App works:

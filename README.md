@@ -1,11 +1,7 @@
-- Cocktail app that emails you a cocktail recipe.
-- Created with Ruby on Rails.
-- Hosted on Heroku.
+This App was built using Ruby on Rails and it is hosted on Heroku.
 
-Simple explanation of the app:
+How the App works:
 
-1. User fills in a form with cocktail name and email
-2. The cocktail application requests the cocktail recipe with the https://www.thecocktaildb.com API (using the 'rest-client' gem).
-3. The rails application sends the recipe via the gmail smtp server.
-
-
+1. The user inputs a cocktail name and email address.
+2. The App searches for this cocktail using the cocktail API from: www.thecocktaildb.com
+3. The App sends you the cocktail recipe via the gmail SMTP server.

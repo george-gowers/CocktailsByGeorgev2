@@ -23,6 +23,25 @@ class CocktailsController < ApplicationController
     end
   end
 
+  # def create
+  #   @cocktail = Cocktail.new(cocktail_params)
+  #   if @cocktail.save
+  #     if api_call != nil?
+  #       # @instructions = @response[0]
+  #       # @ingredients = @response[1]
+  #       # @image = @response[2]
+  #       # @name = @response[3]
+  #       raise
+  #       UserMailer.recipe({ingredients: @response[0], instructions: @response[1], image: @respone[2], name: @response[3], email: @email }).deliver_now
+  #       redirect_to mail_path
+  #     else
+  #       redirect_to not_valid_path
+  #     end
+  #   else
+  #     render :new
+  #   end
+  # end
+
   def reroute
     redirect_to root_path
   end
@@ -35,9 +54,9 @@ class CocktailsController < ApplicationController
     @response = Cocktail.api(name)
   end
 
-  def valid_cocktail?
-    !@response.nil?
-  end
+  # def valid_cocktail?
+  #   !@response.nil?
+  # end
 
   def cocktail_params
     params.require(:cocktail).permit(:name, :email)

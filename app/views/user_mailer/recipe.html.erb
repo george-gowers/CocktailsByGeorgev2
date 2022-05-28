@@ -5,10 +5,7 @@
 <img src="<%= @image %>" alt="" width="100" height="100">
 
 <h2>Ingredients</h2>
-<% @ingredients.each_with_index do |ingredient, index| %>
-  <%= "#{index + 1}.#{ingredient}" %><br>
-<% end %>
-
+<%= @ingredients %>
 
 <h2>Preperation Method</h2>
-<%= @instructions %><br>
+<%= @preperation %><br>
